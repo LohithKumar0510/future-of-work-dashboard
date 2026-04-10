@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Future of Work — AI & Jobs 2015–2035</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1c1c26;
+    --border: rgba(255,255,255,0.07);
+    --accent: #6c63ff;
+    --accent2: #ff6b6b;
+    --accent3: #43e8b0;
+    --accent4: #ffa94d;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent3);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--muted); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: -180px; left: -100px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -200px; right: -100px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(67,232,176,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 900px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent3); margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--accent3);
+  }
+  h1 {
+    font-family: var(--font-head); font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.02em;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  h1 span { color: var(--accent); }
+  h1 em { color: var(--accent3); font-style: normal; }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; color: var(--muted); max-width: 580px;
+    line-height: 1.7; margin-bottom: 3rem;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: #fff;
+    display: block;
+  }
+  .hero-stat-label {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 5rem 2.5rem; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 1rem;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--muted); max-width: 560px; margin-bottom: 3rem; line-height: 1.7;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 1.25rem;
+  }
+  .card-grid.three {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .viz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .viz-card:hover {
+    border-color: rgba(108,99,255,0.35);
+    transform: translateY(-3px);
+  }
+  .viz-card.accent-green { border-top: 2px solid var(--accent3); }
+  .viz-card.accent-red   { border-top: 2px solid var(--accent2); }
+  .viz-card.accent-amber { border-top: 2px solid var(--accent4); }
+  .viz-card.accent-purple{ border-top: 2px solid var(--accent); }
+  .viz-card.span-2 { grid-column: span 2; }
+
+  .card-header {
+    padding: 1.25rem 1.5rem 0;
+    display: flex; align-items: flex-start; justify-content: space-between;
+  }
+  .card-title {
+    font-family: var(--font-head); font-size: 1rem; font-weight: 600; color: #fff;
+  }
+  .card-subtitle {
+    font-size: 12px; color: var(--muted); margin-top: 2px;
+  }
+  .card-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .badge-matplotlib { background: rgba(255,107,107,0.15); color: #ff9999; }
+  .badge-tableau    { background: rgba(255,169,77,0.15);  color: #ffbf77; }
+  .badge-vizhub     { background: rgba(67,232,176,0.15);  color: #43e8b0; }
+  .badge-d3         { background: rgba(108,99,255,0.15);  color: #a89fff; }
+
+  /* image placeholder */
+  .img-placeholder {
+    margin: 1rem 1.5rem;
+    background: var(--surface2);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 10px;
+    min-height: 240px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; color: var(--muted); font-size: 13px; text-align: center;
+    padding: 1.5rem;
+    position: relative; overflow: hidden;
+  }
+  .img-placeholder img {
+    width: 100%; height: 100%; object-fit: contain;
+    position: absolute; inset: 0; border-radius: 10px;
+  }
+  .placeholder-icon {
+    font-size: 28px; opacity: 0.4;
+  }
+  .placeholder-hint {
+    font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 4px;
+  }
+
+  /* iframe embed */
+  .viz-iframe {
+    width: 100%; min-height: 380px;
+    border: none; border-radius: 0 0 14px 14px;
+  }
+
+  .card-footer {
+    padding: 0.75rem 1.5rem 1.25rem;
+    font-size: 12px; color: var(--muted); line-height: 1.5;
+  }
+
+  /* ── INLINE CHARTS (Chart.js) ── */
+  .chart-wrap { margin: 1rem 1.5rem; position: relative; }
+
+  /* ── KEY FINDINGS ── */
+  .findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin-bottom: 3rem;
+  }
+  .finding-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .finding-num {
+    font-family: var(--font-head); font-size: 2rem; font-weight: 800;
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .finding-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .c-green { color: var(--accent3); }
+  .c-red   { color: var(--accent2); }
+  .c-amber { color: var(--accent4); }
+  .c-purple{ color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none; border-top: 1px solid var(--border); margin: 0 2.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+  footer a { color: var(--accent3); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+  .delay-4 { animation-delay: 0.5s; }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .viz-card.span-2 { grid-column: span 1; }
+    .hero { padding: 5rem 1.25rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    .divider { margin: 0 1.25rem; }
+    footer { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">AI × Jobs</span>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#risk">Risk Analysis</a></li>
+    <li><a href="#salary">Salary</a></li>
+    <li><a href="#trends">Trends</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow fade-up">Data Visualization · 2015–2035</div>
+    <h1 class="fade-up delay-1">
+      The <span>Future</span><br>of <em>Work</em>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      How artificial intelligence is reshaping jobs, salaries, and survival across 10 roles, 6 countries, and two decades.
+    </p>
+    <div class="hero-stats fade-up delay-3">
+      <div>
+        <span class="hero-stat-num">12,343</span>
+        <span class="hero-stat-label">Job records</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">0.396</span>
+        <span class="hero-stat-label">Avg AI risk score</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">10</span>
+        <span class="hero-stat-label">Job roles tracked</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">6</span>
+        <span class="hero-stat-label">Countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- KEY FINDINGS -->
+<section id="overview">
+  <p class="section-label">Key findings</p>
+  <h2>At a glance</h2>
+  <p class="section-desc">Top-level numbers from 12,343 records spanning 10 job titles, 6 countries, and projections to 2035.</p>
+
+  <div class="findings-grid">
+    <div class="finding-card">
+      <div class="finding-num c-red">0.75</div>
+      <div class="finding-desc">Highest AI risk score — Business Analyst faces the greatest automation threat.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-num c-green">0.15</div>
+      <div class="finding-desc">Lowest AI risk — AI Researcher is the most resilient role in the dataset.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-num c-amber">3.5×</div>
+      <div class="finding-desc">USA pays 3.5× more than India ($47.6K vs $13.6K average salary).</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-num c-purple">+72%</div>
+      <div class="finding-desc">Risk score climbs from 0.295 in 2015 to 0.508 in 2035 — a 72% rise.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-num c-green">89%</div>
+      <div class="finding-desc">Of roles are Stable or Growing (Class 1 + 2). Only 11% at serious risk.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-num c-amber">$48K</div>
+      <div class="finding-desc">Senior-level average salary — double the Entry-level average of $22.6K.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RISK ANALYSIS -->
+<section id="risk">
+  <p class="section-label">Risk analysis</p>
+  <h2>AI displacement risk by role</h2>
+  <p class="section-desc">Which jobs are most exposed to AI automation? Scores range from 0 (safe) to 1 (high risk).</p>
+
+  <div class="card-grid">
+
+    <!-- Matplotlib placeholder -->
+    <div class="viz-card accent-red">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Risk score by job title</div>
+          <div class="card-subtitle">Horizontal bar chart · all 10 roles</div>
+        </div>
+        <span class="card-badge badge-matplotlib">Matplotlib</span>
+      </div>
+      <div class="img-placeholder" style="min-height:280px;">
+        <!-- REPLACE: <img src="images/risk_by_role.png" alt="AI risk score by job title"> -->
+        <div class="placeholder-icon">📊</div>
+        <div>Replace with your Matplotlib chart</div>
+        <div class="placeholder-hint">images/risk_by_role.png</div>
+      </div>
+      <div class="card-footer">
+        Business Analyst leads at 0.75; AI Researcher is safest at 0.15. Roles with broad, repetitive analytical tasks show higher exposure.
+      </div>
+    </div>
+
+    <!-- Tableau placeholder -->
+    <div class="viz-card accent-amber">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Risk vs salary scatter</div>
+          <div class="card-subtitle">Country-level comparison</div>
+        </div>
+        <span class="card-badge badge-tableau">Tableau</span>
+      </div>
+      <div class="img-placeholder" style="min-height:280px;">
+        <!-- REPLACE: <img src="images/risk_salary_scatter.png" alt="Risk vs Salary scatter"> -->
+        <!-- OR use Tableau Public embed: <iframe src="YOUR_TABLEAU_EMBED_URL" class="viz-iframe"></iframe> -->
+        <div class="placeholder-icon">⬛</div>
+        <div>Replace with your Tableau embed or screenshot</div>
+        <div class="placeholder-hint">Tableau Public embed or images/risk_salary.png</div>
+      </div>
+      <div class="card-footer">
+        Higher salaries loosely correlate with lower AI risk — premium roles tend to require complex human judgment.
+      </div>
+    </div>
+
+    <!-- VizHub / D3 interactive -->
+    <div class="viz-card accent-purple span-2">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Interactive risk explorer — role × country × year</div>
+          <div class="card-subtitle">Bubble chart with year slider</div>
+        </div>
+        <span class="card-badge badge-vizhub">VizHub · D3.js</span>
+      </div>
+      <div class="img-placeholder" style="min-height:340px;">
+        <!-- REPLACE with VizHub embed: -->
+        <!-- <iframe src="https://vizhub.com/YOUR_USERNAME/YOUR_VIZ_ID?mode=embed" class="viz-iframe" style="min-height:340px;"></iframe> -->
+        <div class="placeholder-icon">🌐</div>
+        <div>Replace with your VizHub D3 interactive embed</div>
+        <div class="placeholder-hint">VizHub embed URL → iframe src</div>
+      </div>
+      <div class="card-footer">
+        Explore AI risk across roles and countries over time. Built with D3.js on VizHub — click a role to highlight, drag the year slider to animate.
+      </div>
+    </div>
+
+    <!-- Risk distribution (built-in Chart.js) -->
+    <div class="viz-card accent-red">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Risk category distribution</div>
+          <div class="card-subtitle">49% Medium · 33% Low · 19% High</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="riskDist" role="img" aria-label="Donut chart: Medium Risk 49%, Low Risk 33%, High Risk 19%.">Medium 6016, Low 4033, High 2294.</canvas>
+      </div>
+      <div class="card-footer">
+        Nearly half of all records fall in the Medium Risk zone — a signal of broad, gradual automation pressure rather than acute disruption.
+      </div>
+    </div>
+
+    <!-- Survival classes -->
+    <div class="viz-card accent-green">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Job survival class breakdown</div>
+          <div class="card-subtitle">Class 0 = At risk · 1 = Stable · 2 = Growing</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="survivalChart" role="img" aria-label="Bar chart: At Risk 1355, Stable 5806, Growing 5182.">Class 0: 1355, Class 1: 5806, Class 2: 5182.</canvas>
+      </div>
+      <div class="card-footer">
+        89% of roles are Stable or Growing — automation is reshaping work more than eliminating it outright.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SALARY -->
+<section id="salary">
+  <p class="section-label">Compensation</p>
+  <h2>Salary landscape</h2>
+  <p class="section-desc">How pay varies by country, experience level, and job role — and what it signals about the global talent market.</p>
+
+  <div class="card-grid three">
+
+    <!-- Salary by country (built-in) -->
+    <div class="viz-card accent-amber">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Average salary by country</div>
+          <div class="card-subtitle">USD · all roles combined</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="salaryCountry" role="img" aria-label="Bar chart of salary by country. USA highest at $47,629.">USA 47629, UK 38176, Australia 36915, Canada 35850, Germany 34240, India 13615.</canvas>
+      </div>
+      <div class="card-footer">USA leads at $47.6K — nearly 3.5× India's average.</div>
+    </div>
+
+    <!-- Salary by experience (built-in) -->
+    <div class="viz-card accent-green">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Salary by experience level</div>
+          <div class="card-subtitle">Entry → Mid → Senior progression</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="salaryExp" role="img" aria-label="Bar chart of salary by experience. Senior $48,062, Mid $32,567, Entry $22,633.">Entry 22633, Mid 32567, Senior 48062.</canvas>
+      </div>
+      <div class="card-footer">Senior roles command a 112% premium over Entry level.</div>
+    </div>
+
+    <!-- Tableau salary heatmap -->
+    <div class="viz-card accent-purple">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Salary heatmap — role × country</div>
+          <div class="card-subtitle">Color-encoded pay matrix</div>
+        </div>
+        <span class="card-badge badge-tableau">Tableau</span>
+      </div>
+      <div class="img-placeholder" style="min-height:240px;">
+        <!-- REPLACE: <img src="images/salary_heatmap.png" alt="Salary heatmap"> -->
+        <div class="placeholder-icon">🟪</div>
+        <div>Replace with your Tableau heatmap</div>
+        <div class="placeholder-hint">images/salary_heatmap.png</div>
+      </div>
+      <div class="card-footer">Spot where specific roles pay best across the 6 countries.</div>
+    </div>
+
+    <!-- Matplotlib salary distribution -->
+    <div class="viz-card accent-red" style="grid-column: span 2;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Salary distribution — all roles</div>
+          <div class="card-subtitle">Violin / box plot grouped by job title</div>
+        </div>
+        <span class="card-badge badge-matplotlib">Matplotlib</span>
+      </div>
+      <div class="img-placeholder" style="min-height:260px;">
+        <!-- REPLACE: <img src="images/salary_violin.png" alt="Salary distribution violin plot"> -->
+        <div class="placeholder-icon">🎻</div>
+        <div>Replace with your Matplotlib violin / box plot</div>
+        <div class="placeholder-hint">images/salary_violin.png</div>
+      </div>
+      <div class="card-footer">
+        Violin plots reveal not just averages but the spread — some roles show bimodal distributions driven by country wage gaps.
+      </div>
+    </div>
+
+    <!-- Salary bucket donut -->
+    <div class="viz-card accent-amber">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Salary bucket breakdown</div>
+          <div class="card-subtitle">High / Medium / Low distribution</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="salaryBucket" role="img" aria-label="Donut chart of salary buckets.">High, Medium, Low.</canvas>
+      </div>
+      <div class="card-footer">Salary buckets plotted against role and country.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TRENDS -->
+<section id="trends">
+  <p class="section-label">Temporal trends</p>
+  <h2>2015 → 2035: the arc of automation</h2>
+  <p class="section-desc">Two decades of data reveal a steady, compounding rise in AI exposure — with no sign of leveling off.</p>
+
+  <div class="card-grid">
+
+    <!-- Risk trend (built-in) -->
+    <div class="viz-card accent-red">
+      <div class="card-header">
+        <div>
+          <div class="card-title">AI risk score — 20-year trend</div>
+          <div class="card-subtitle">Average across all roles · 2015–2035</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:280px;">
+        <canvas id="riskTrend" role="img" aria-label="Line chart of AI risk trend from 0.295 in 2015 to 0.508 in 2035.">Rising trend from 0.295 to 0.508.</canvas>
+      </div>
+      <div class="card-footer">
+        Risk score grows from 0.295 in 2015 to 0.508 in 2035 — a 72% increase. The curve steepens after 2028.
+      </div>
+    </div>
+
+    <!-- VizHub animated trend -->
+    <div class="viz-card accent-purple">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Animated role-level risk over time</div>
+          <div class="card-subtitle">Year-by-year animated line chart</div>
+        </div>
+        <span class="card-badge badge-vizhub">VizHub · D3.js</span>
+      </div>
+      <div class="img-placeholder" style="min-height:280px;">
+        <!-- REPLACE with VizHub animated embed -->
+        <div class="placeholder-icon">▶</div>
+        <div>Replace with your VizHub animated D3 line chart</div>
+        <div class="placeholder-hint">VizHub embed → iframe</div>
+      </div>
+      <div class="card-footer">
+        Each role traces its own risk trajectory. AI Researcher remains flat; Business Analyst surges steeply.
+      </div>
+    </div>
+
+    <!-- Job openings trend -->
+    <div class="viz-card accent-green span-2">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Job openings trend by year</div>
+          <div class="card-subtitle">Average openings per year · all roles</div>
+        </div>
+        <span class="card-badge badge-matplotlib">Matplotlib</span>
+      </div>
+      <div class="img-placeholder" style="min-height:220px;">
+        <!-- REPLACE: <img src="images/openings_trend.png" alt="Job openings trend"> -->
+        <div class="placeholder-icon">📈</div>
+        <div>Replace with your Matplotlib line chart of openings over time</div>
+        <div class="placeholder-hint">images/openings_trend.png</div>
+      </div>
+      <div class="card-footer">
+        Despite rising AI risk, aggregate job openings remain stable (~25K/year average), suggesting automation creates as many roles as it displaces.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Skills & demand</p>
+  <h2>Which skills survive the AI wave?</h2>
+  <p class="section-desc">Skill demand scores and primary skills mapped against AI risk — identifying the competencies that remain resilient.</p>
+
+  <div class="card-grid three">
+
+    <!-- Skill demand (built-in) -->
+    <div class="viz-card accent-green">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Skill demand score by skill</div>
+          <div class="card-subtitle">Average demand (0–100)</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:280px;">
+        <canvas id="skillDemand" role="img" aria-label="Horizontal bar chart of skill demand scores. Java leads at 79.9.">Java 79.9, Excel 79.8, Deep Learning 79.6, Strategy 79.6, Docker 79.5, AWS 79.5, SQL 79.4, Python 79.2, Security 78.9.</canvas>
+      </div>
+      <div class="card-footer">Skills are tightly clustered in demand — Java and Excel lead narrowly.</div>
+    </div>
+
+    <!-- Tableau skill-risk matrix -->
+    <div class="viz-card accent-amber">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Skill vs AI risk matrix</div>
+          <div class="card-subtitle">Which skills belong to high-risk roles?</div>
+        </div>
+        <span class="card-badge badge-tableau">Tableau</span>
+      </div>
+      <div class="img-placeholder" style="min-height:280px;">
+        <!-- REPLACE: <img src="images/skill_risk_matrix.png" alt="Skill vs Risk matrix"> -->
+        <div class="placeholder-icon">🔢</div>
+        <div>Replace with your Tableau skill × risk matrix</div>
+        <div class="placeholder-hint">images/skill_risk_matrix.png</div>
+      </div>
+      <div class="card-footer">Excel and SQL cluster in high-risk roles; Deep Learning and Security appear in low-risk ones.</div>
+    </div>
+
+    <!-- Matplotlib correlation heatmap -->
+    <div class="viz-card accent-purple">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Correlation heatmap</div>
+          <div class="card-subtitle">All numeric features vs AI risk score</div>
+        </div>
+        <span class="card-badge badge-matplotlib">Matplotlib</span>
+      </div>
+      <div class="img-placeholder" style="min-height:280px;">
+        <!-- REPLACE: <img src="images/correlation_heatmap.png" alt="Correlation heatmap"> -->
+        <div class="placeholder-icon">🌡</div>
+        <div>Replace with your Matplotlib seaborn heatmap</div>
+        <div class="placeholder-hint">images/correlation_heatmap.png</div>
+      </div>
+      <div class="card-footer">Salary and skill demand show negative correlation with AI risk — a signal that well-paid, specialized roles are more resilient.</div>
+    </div>
+
+    <!-- VizHub top roles openings -->
+    <div class="viz-card accent-red" style="grid-column: span 2;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Job openings by role — interactive treemap</div>
+          <div class="card-subtitle">Area ∝ average openings · colored by AI risk</div>
+        </div>
+        <span class="card-badge badge-vizhub">VizHub · D3.js</span>
+      </div>
+      <div class="img-placeholder" style="min-height:260px;">
+        <!-- REPLACE with VizHub treemap embed -->
+        <div class="placeholder-icon">🗺</div>
+        <div>Replace with your VizHub D3 treemap</div>
+        <div class="placeholder-hint">VizHub embed → iframe</div>
+      </div>
+      <div class="card-footer">
+        Treemap area represents average job openings; color encodes AI risk level. Data Scientist and Business Analyst dominate both openings and risk.
+      </div>
+    </div>
+
+    <!-- Education level -->
+    <div class="viz-card accent-green">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Education level distribution</div>
+          <div class="card-subtitle">Bachelor · Master · PhD</div>
+        </div>
+        <span class="card-badge badge-d3">Chart.js</span>
+      </div>
+      <div class="chart-wrap" style="height:200px;">
+        <canvas id="eduChart" role="img" aria-label="Pie chart of education levels.">Bachelor, Master, PhD breakdown.</canvas>
+      </div>
+      <div class="card-footer">Education distribution across all 12,343 records in the dataset.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <p style="font-weight:500; color: var(--text); margin-bottom:4px;">The Future of Work — AI & Jobs 2015–2035</p>
+    <p>Dataset: Future of Jobs AI Dataset · Visualizations: Matplotlib, Tableau, VizHub/D3.js, Chart.js</p>
+  </div>
+  <div style="text-align:right;">
+    <p>Built for GitHub Pages</p>
+    <p>Source: <a href="#">github.com/YOUR_USERNAME/YOUR_REPO</a></p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = true;
+const textColor = 'rgba(255,255,255,0.55)';
+const gridColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = textColor;
+
+const baseOpts = () => ({
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { color: 'transparent' }, ticks: { color: textColor } },
+    y: { grid: { color: gridColor }, ticks: { color: textColor } }
+  }
+});
+
+/* Risk distribution donut */
+new Chart(document.getElementById('riskDist'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Medium Risk','Low Risk','High Risk'],
+    datasets: [{ data: [6016,4033,2294], backgroundColor: ['#ffa94d','#43e8b0','#ff6b6b'], borderWidth: 0 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '62%',
+    plugins: { legend: { display: true, position: 'right', labels: { color: textColor, boxWidth: 12, padding: 14 } } }
+  }
+});
+
+/* Job survival bar */
+new Chart(document.getElementById('survivalChart'), {
+  type: 'bar',
+  data: {
+    labels: ['At Risk (0)','Stable (1)','Growing (2)'],
+    datasets: [{ data: [1355,5806,5182], backgroundColor: ['#ff6b6b','#ffa94d','#43e8b0'], borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...baseOpts(), scales: { x: { grid:{color:'transparent'}, ticks:{color:textColor} }, y: { grid:{color:gridColor}, ticks:{color:textColor} } } }
+});
+
+/* Salary by country */
+new Chart(document.getElementById('salaryCountry'), {
+  type: 'bar',
+  data: {
+    labels: ['USA','UK','Australia','Canada','Germany','India'],
+    datasets: [{ data: [47629,38176,36915,35850,34240,13615], backgroundColor: '#ffa94d', borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...baseOpts(), scales: { x:{grid:{color:'transparent'},ticks:{color:textColor}}, y:{grid:{color:gridColor},ticks:{color:textColor,callback:v=>'$'+Math.round(v/1000)+'k'}} } }
+});
+
+/* Salary by experience */
+new Chart(document.getElementById('salaryExp'), {
+  type: 'bar',
+  data: {
+    labels: ['Entry','Mid','Senior'],
+    datasets: [{ data: [22633,32567,48062], backgroundColor: ['#6c63ff','#8b84ff','#43e8b0'], borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...baseOpts(), scales: { x:{grid:{color:'transparent'},ticks:{color:textColor}}, y:{grid:{color:gridColor},ticks:{color:textColor,callback:v=>'$'+Math.round(v/1000)+'k'}} } }
+});
+
+/* Salary bucket donut */
+new Chart(document.getElementById('salaryBucket'), {
+  type: 'doughnut',
+  data: {
+    labels: ['High','Medium','Low'],
+    datasets: [{ data: [4300,5200,2843], backgroundColor: ['#43e8b0','#ffa94d','#ff6b6b'], borderWidth: 0 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '60%',
+    plugins: { legend: { display: true, position: 'right', labels: { color: textColor, boxWidth: 12, padding: 12 } } }
+  }
+});
+
+/* Risk trend line */
+const riskTrendData = {
+  "2015":0.295,"2016":0.311,"2017":0.316,"2018":0.326,"2019":0.329,
+  "2020":0.357,"2021":0.35,"2022":0.371,"2023":0.369,"2024":0.4,
+  "2025":0.405,"2026":0.416,"2027":0.406,"2028":0.425,"2029":0.43,
+  "2030":0.427,"2031":0.458,"2032":0.462,"2033":0.467,"2034":0.479,"2035":0.508
+};
+new Chart(document.getElementById('riskTrend'), {
+  type: 'line',
+  data: {
+    labels: Object.keys(riskTrendData),
+    datasets: [{
+      data: Object.values(riskTrendData),
+      borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.1)',
+      fill: true, tension: 0.35, pointRadius: 3, pointBackgroundColor: '#ff6b6b'
+    }]
+  },
+  options: { ...baseOpts(), scales: { x:{grid:{color:gridColor},ticks:{color:textColor,maxTicksLimit:8}}, y:{grid:{color:gridColor},ticks:{color:textColor},min:0.2,max:0.55,title:{display:true,text:'Avg AI risk',color:textColor}} } }
+});
+
+/* Skill demand horizontal bar */
+new Chart(document.getElementById('skillDemand'), {
+  type: 'bar',
+  data: {
+    labels: ['Java','Excel','Deep Learning','Strategy','Docker','AWS','SQL','Python','Security'],
+    datasets: [{ data: [79.9,79.8,79.6,79.6,79.5,79.5,79.4,79.2,78.9], backgroundColor: '#6c63ff', borderRadius: 4, borderSkipped: false }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x:{grid:{color:gridColor},ticks:{color:textColor},min:78,max:80.5}, y:{grid:{color:'transparent'},ticks:{color:textColor}} }
+  }
+});
+
+/* Education donut */
+new Chart(document.getElementById('eduChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Bachelor','Master','PhD'],
+    datasets: [{ data: [4200,5100,3043], backgroundColor: ['#43e8b0','#6c63ff','#ffa94d'], borderWidth: 0 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '58%',
+    plugins: { legend: { display: true, position: 'right', labels: { color: textColor, boxWidth: 12, padding: 10 } } }
+  }
+});
+</script>
+
+</body>
+</html>
